@@ -3,16 +3,15 @@ import { BookingCard } from "../components/sections/BookingCard";
 import { PageHero } from "../components/sections/PageHero";
 import { Container } from "../components/ui/Container";
 import { Seo } from "../components/ui/Seo";
-import { site } from "../data/site";
+import { formatAddress, site } from "../data/site";
 
 export default function Contact() {
-  const { address } = site;
-  const mapQuery = encodeURIComponent(`${address.street}, ${address.city}, ${address.region}`);
+  const mapQuery = encodeURIComponent(formatAddress());
 
   const details = [
     { icon: Phone, label: "Call", value: site.phone, href: site.phoneHref },
     { icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}` },
-    { icon: MapPin, label: "Office", value: `${address.street}, ${address.city}, ${address.region}` },
+    { icon: MapPin, label: "Office", value: formatAddress() },
   ];
 
   return (

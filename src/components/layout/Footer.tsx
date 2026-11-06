@@ -2,12 +2,11 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "react-router";
 import { allPlaces } from "../../data/areas";
 import { byCategory, categories, servicePath, type Category } from "../../data/services";
-import { site } from "../../data/site";
+import { formatAddress, site } from "../../data/site";
 import { Container } from "../ui/Container";
 import { Logo } from "./Logo";
 
 export function Footer() {
-  const { address } = site;
   return (
     <footer className="bg-navy-950 pt-16 pb-28 text-navy-200 sm:pb-10">
       <Container>
@@ -33,7 +32,7 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-teal-400" />
                 <span>
-                  {address.street}, {address.city}, {address.region} {address.postal}
+                  {formatAddress()}
                 </span>
               </li>
             </ul>

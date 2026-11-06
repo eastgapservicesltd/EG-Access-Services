@@ -1,4 +1,4 @@
-// Business details. The office address is still a placeholder — replace before launch.
+// Business details.
 export const site = {
   name: "EG Access Services Inc.",
   shortName: "EG Access",
@@ -6,11 +6,12 @@ export const site = {
   phone: "(647) 507-9991",
   phoneHref: "tel:+16475079991",
   email: "egaccessservices@gmail.com",
+  // Add `street` and `postal` here if you want a full street address shown.
   address: {
-    street: "100 Placeholder Ave, Unit 4",
-    city: "Toronto",
+    street: "",
+    city: "Oakville",
     region: "ON",
-    postal: "M5V 0A0",
+    postal: "",
   },
   responseTime: "30 minutes",
   jobsCompleted: "8,500+",
@@ -18,6 +19,11 @@ export const site = {
   reviewCount: 320,
   url: "https://www.egaccessservices.com",
 };
+
+// "street, city, region postal", skipping any empty parts.
+export function formatAddress({ street, city, region, postal } = site.address) {
+  return [street, city, [region, postal].filter(Boolean).join(" ")].filter(Boolean).join(", ");
+}
 
 export function img(id: string, width = 1200) {
   return `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${width}&q=70`;
