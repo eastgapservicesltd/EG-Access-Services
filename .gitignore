@@ -1,0 +1,8 @@
+node_modules
+dist
+*.local
+
+sites.md
+todo.md
+.agents
+.claude
