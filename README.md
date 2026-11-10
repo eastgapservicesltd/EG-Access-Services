@@ -27,14 +27,14 @@ A fast, static single-page site built with React, TypeScript, Vite and Tailwind 
 
 ## Tech stack
 
-| Area      | Choice                                  |
-| --------- | --------------------------------------- |
-| Framework | React 19 + TypeScript                   |
-| Build     | Vite                                    |
+| Area      | Choice                                     |
+| --------- | ------------------------------------------ |
+| Framework | React 19 + TypeScript                      |
+| Build     | Vite                                       |
 | Styling   | Tailwind CSS v4 (theme in `src/index.css`) |
-| Routing   | React Router                            |
-| Icons     | lucide-react                            |
-| Font      | Archivo (Google Fonts)                  |
+| Routing   | React Router                               |
+| Icons     | lucide-react                               |
+| Font      | Archivo (Google Fonts)                     |
 
 ## Getting started
 
@@ -71,18 +71,18 @@ public/                   # Static files copied as-is (favicon)
 
 ## Routes
 
-| Path                       | Page                                  |
-| -------------------------- | ------------------------------------- |
-| `/`                        | Home                                  |
-| `/locksmith`               | Locksmith services hub                |
-| `/locksmith/:slug`         | Locksmith service detail              |
-| `/garage-doors`            | Garage door services hub              |
-| `/garage-doors/:slug`      | Garage door service detail            |
-| `/about`                   | About the company                     |
-| `/service-areas`           | Areas served                          |
-| `/faq`                     | Frequently asked questions            |
-| `/contact`                 | Contact details, quote form and map   |
-| `*`                        | 404                                   |
+| Path                  | Page                                |
+| --------------------- | ----------------------------------- |
+| `/`                   | Home                                |
+| `/locksmith`          | Locksmith services hub              |
+| `/locksmith/:slug`    | Locksmith service detail            |
+| `/garage-doors`       | Garage door services hub            |
+| `/garage-doors/:slug` | Garage door service detail          |
+| `/about`              | About the company                   |
+| `/service-areas`      | Areas served                        |
+| `/faq`                | Frequently asked questions          |
+| `/contact`            | Contact details, quote form and map |
+| `*`                   | 404                                 |
 
 ## Editing content
 
@@ -109,15 +109,6 @@ Because the site uses client-side routing, the host must serve `index.html` for 
 - **Netlify** — add `public/_redirects` containing `/*  /index.html  200`
 - **Vercel** — add a `vercel.json` with `{ "rewrites": [{ "source": "/(.*)", "destination": "/" }] }`
 - **Cloudflare Pages** — single-page app fallback is applied automatically when there is no `404.html`
-
-## Before launch
-
-- Add a street address and postal code in `src/data/site.ts` if you want the full address shown
-- Replace the sample reviews in `src/data/testimonials.ts` with real ones
-- Confirm the service areas, brands and service copy are accurate
-- Wire up the quote form
-- Swap stock photos for real ones and add an `og:image`
-- Add `sitemap.xml` and `robots.txt` to `public/`
 
 ## License
 
