@@ -14,9 +14,6 @@ export const site = {
     postal: "",
   },
   responseTime: "30 minutes",
-  jobsCompleted: "8,500+",
-  rating: "4.9",
-  reviewCount: 320,
   url: "https://www.egaccessservices.com",
 };
 

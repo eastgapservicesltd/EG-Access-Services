@@ -48,7 +48,7 @@ export default function Faq() {
           ))}
         </div>
       </Container>
-      <CtaBanner title="Still have a question?" text="Give us a call. You'll talk to someone who works on doors and locks every day." />
+      <CtaBanner title="Still have a question?" text="Give us a call. You'll talk to someone who works on doors and locks daily." />
     </>
   );
 }

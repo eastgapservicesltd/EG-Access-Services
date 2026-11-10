@@ -1,6 +1,6 @@
 import { CircleCheck } from "lucide-react";
 import { useId, useState, type FormEvent } from "react";
-import { byCategory, categories, type Category } from "../../data/services";
+import { byCategory, categories, services, type Category } from "../../data/services";
 import { site } from "../../data/site";
 
 type Fields = {
@@ -36,13 +36,15 @@ export function QuoteForm({ defaultService = "", compact = false }: { defaultSer
   const [fields, setFields] = useState<Fields>({ ...empty, service: defaultService });
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState(false);
 
   const set = (k: keyof Fields) => (e: { target: { value: string } }) => {
     setFields((f) => ({ ...f, [k]: e.target.value }));
     if (errors[k]) setErrors((er) => ({ ...er, [k]: undefined }));
   };
 
-  function onSubmit(e: FormEvent) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault();
     const found = validate(fields);
     setErrors(found);
@@ -51,8 +53,16 @@ export function QuoteForm({ defaultService = "", compact = false }: { defaultSer
       document.getElementById(`${id}-${first}`)?.focus();
       return;
     }
-    // TODO: send `fields` to Formspree, EmailJS or your own API here.
-    setSent(true);
+    setSending(true);
+    setSendError(false);
+    try {
+      await sendBooking(fields);
+      setSent(true);
+    } catch {
+      setSendError(true);
+    } finally {
+      setSending(false);
+    }
   }
 
   if (sent) {
@@ -168,16 +178,53 @@ export function QuoteForm({ defaultService = "", compact = false }: { defaultSer
         <textarea {...omit(message)} rows={4} placeholder="For example: the spring snapped and the door won't open" />
       </div>
       <div className="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-slate">We'll get back to you with a quote.</p>
+        {sendError ? (
+          <p role="alert" className="text-sm text-red-600">
+            Something went wrong sending your request. Please try again, or call{" "}
+            <a href={site.phoneHref} className="font-semibold underline">
+              {site.phone}
+            </a>
+            .
+          </p>
+        ) : (
+          <p className="text-sm text-slate">We'll get back to you with a quote.</p>
+        )}
         <button
           type="submit"
-          className="rounded-full bg-teal-500 px-7 py-3.5 font-semibold text-navy-900 transition-colors hover:bg-teal-400 active:bg-teal-300"
+          disabled={sending}
+          className="shrink-0 rounded-full disabled:cursor-wait disabled:opacity-70  bg-teal-500 px-7 py-3.5 font-semibold text-navy-900 transition-colors hover:bg-teal-400 active:bg-teal-300"
         >
-          Send request
+          {sending ? "Sending…" : "Send request"}
         </button>
       </div>
     </form>
   );
+}
+
+// Emails the booking straight to the business inbox via FormSubmit (no backend needed).
+// The first submission triggers a one-time activation email to site.email that must be confirmed.
+async function sendBooking(f: Fields) {
+  const serviceName =
+    f.service === "other" ? "Something else" : (services.find((s) => s.slug === f.service)?.title ?? f.service);
+  const address = [f.unit && `Unit ${f.unit}`, f.street, f.city].filter(Boolean).join(", ");
+  const res = await fetch(`https://formsubmit.co/ajax/${site.email}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({
+      _subject: `New booking request: ${serviceName} (${f.name})`,
+      _template: "table",
+      _captcha: "false",
+      ...(f.email && { _replyto: f.email }),
+      Name: f.name,
+      Phone: f.phone,
+      Email: f.email || "Not given",
+      Service: serviceName,
+      Address: address,
+      Details: f.message || "None",
+    }),
+  });
+  const data = await res.json().catch(() => null);
+  if (!res.ok || String(data?.success) !== "true") throw new Error("Booking request failed");
 }
 
 function omit<T extends { label: unknown; error: unknown }>(f: T) {

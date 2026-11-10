@@ -11,7 +11,7 @@ export const generalFaqs: Faq[] = [
   },
   {
     q: "Who will come to my door?",
-    a: "An experienced EG Access technician who works on locks and garage doors every day.",
+    a: "An experienced EG Access technician who works on locks and garage doors daily.",
   },
   {
     q: "Which payment methods do you accept?",

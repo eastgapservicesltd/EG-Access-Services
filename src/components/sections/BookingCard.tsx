@@ -1,4 +1,5 @@
-import { Check, Mail, MessageSquareText, Phone } from "lucide-react";
+import { ArrowRight, Check, Mail, MessageSquareText, Phone } from "lucide-react";
+import { Link, useLocation } from "react-router";
 import { site } from "../../data/site";
 
 const smsHref = site.phoneHref.replace("tel:", "sms:");
@@ -16,10 +17,23 @@ const include = [
 
 // How to book: call, text or email, plus what to tell us. Used on the home page and the contact page.
 export function BookingCard({ className = "" }: { className?: string }) {
+  const onContactPage = useLocation().pathname === "/contact";
   return (
     <div className={`rounded-3xl bg-navy-800 p-6 text-white sm:p-8 ${className}`}>
       <h2 className="text-2xl font-bold">Book an appointment</h2>
-      <p className="mt-2 leading-relaxed text-navy-200">Email, call or text us to book.</p>
+      <p className="mt-2 leading-relaxed text-navy-200">
+        {onContactPage ? "Prefer to reach us directly? Email, call or text." : "Book online, or email, call or text us."}
+      </p>
+
+      {!onContactPage && (
+        <Link
+          to="/contact#book"
+          className="mt-6 flex items-center justify-between gap-4 rounded-full bg-teal-500 px-6 py-3.5 font-semibold text-navy-900 transition-colors hover:bg-teal-400"
+        >
+          Fill in the booking form
+          <ArrowRight aria-hidden className="size-5" />
+        </Link>
+      )}
 
       <ul className="mt-6 grid gap-3">
         {contactWays.map((c) => (

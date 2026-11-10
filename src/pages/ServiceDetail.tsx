@@ -6,9 +6,11 @@ import { ServiceTiles } from "../components/sections/ServiceTiles";
 import { Accordion } from "../components/ui/Accordion";
 import { Button } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
+import { JsonLd } from "../components/ui/JsonLd";
 import { Seo } from "../components/ui/Seo";
+import { serviceSchema } from "../lib/schema";
 import { byCategory, categories, findService, servicePath, type Category } from "../data/services";
-import { site } from "../data/site";
+import { img, site } from "../data/site";
 import NotFound from "./NotFound";
 
 export default function ServiceDetail({ category }: { category: Category }) {
@@ -21,7 +23,13 @@ export default function ServiceDetail({ category }: { category: Category }) {
 
   return (
     <>
-      <Seo title={service.title} description={service.short} path={servicePath(service)} />
+      <Seo
+        title={`${service.title} in the GTA`}
+        description={service.short}
+        path={servicePath(service)}
+        image={img(service.image, 1200)}
+      />
+      <JsonLd data={serviceSchema(service)} />
       <PageHero
         title={service.title}
         lead={service.short}

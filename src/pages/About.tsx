@@ -14,13 +14,6 @@ const values = [
   { title: "Leave it better", text: "We test the work with you and clean up before we leave." },
 ];
 
-const credentials = [
-  "Experienced technicians",
-  "Uniformed technicians with company ID",
-  "Ongoing training on locks, openers and springs",
-  "Locksmith and garage door work from one company",
-];
-
 export default function About() {
   return (
     <>
@@ -65,19 +58,6 @@ export default function About() {
       </section>
 
       <WhyChooseUs />
-
-      <section className="bg-mist py-20 sm:py-24">
-        <Container className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
-          <SectionHeading title="What you can count on" />
-          <ul className="grid gap-x-8 sm:grid-cols-2">
-            {credentials.map((c) => (
-              <li key={c} className="border-b border-navy-800/10 py-4 leading-relaxed text-ink">
-                {c}
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
 
       <Testimonials />
       <div className="pt-20 sm:pt-24">

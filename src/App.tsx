@@ -9,9 +9,9 @@ import NotFound from "./pages/NotFound";
 import ServiceAreas from "./pages/ServiceAreas";
 import ServiceDetail from "./pages/ServiceDetail";
 
-export default function App() {
+// Shared by the browser (BrowserRouter) and the build-time prerenderer (StaticRouter).
+export function AppRoutes() {
   return (
-    <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
@@ -26,6 +26,13 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
     </BrowserRouter>
   );
 }

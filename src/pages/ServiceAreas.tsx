@@ -15,7 +15,7 @@ export default function ServiceAreas() {
       />
       <PageHero
         title="Service areas"
-        lead={`We cover the Greater Toronto Area with technicians on the road every day. Don't see your town? Call ${site.phone}, as we often travel further for scheduled work.`}
+        lead={`We cover the Greater Toronto Area with technicians on the road daily. Don't see your town? Call ${site.phone}, as we often travel further for scheduled work.`}
         crumbs={[{ label: "Home", to: "/" }, { label: "Service areas" }]}
       />
       <AreasList showLink={false} />

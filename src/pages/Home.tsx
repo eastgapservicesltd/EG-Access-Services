@@ -11,14 +11,14 @@ import { TrustStrip } from "../components/sections/TrustStrip";
 import { WhyChooseUs } from "../components/sections/WhyChooseUs";
 import { Seo } from "../components/ui/Seo";
 import { generalFaqs } from "../data/faqs";
-import { site } from "../data/site";
 
 export default function Home() {
   return (
     <>
       <Seo
-        title={site.name}
-        description="Locksmith and garage door repair across the GTA. Lockouts, rekeys, smart locks, broken springs, openers and new doors. Experienced technicians. Call, text or email to book."
+        title="Locksmith & Garage Door Repair in Oakville & the GTA | EG Access"
+        fullTitle
+        description="Locksmith and garage door repair in Oakville and across the GTA. Lockouts, rekeys, smart locks, broken springs, openers and new doors. Call, text or book online."
       />
       <HomeHero />
       <TrustStrip />

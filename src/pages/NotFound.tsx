@@ -1,11 +1,12 @@
 import { Button } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
 import { RingMark } from "../components/ui/RingMark";
+import { Seo } from "../components/ui/Seo";
 
 export default function NotFound() {
   return (
     <section className="bg-navy-800 text-white">
-      <title>Page not found | EG Access</title>
+      <Seo title="Page not found" description="The page you were looking for doesn't exist." noindex />
       <Container className="flex flex-col items-start gap-8 py-24 sm:py-32 md:flex-row md:items-center">
         <RingMark className="size-32 shrink-0" />
         <div>

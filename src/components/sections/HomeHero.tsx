@@ -1,4 +1,4 @@
-import { ArrowRight, KeyRound, Star, Warehouse } from "lucide-react";
+import { ArrowRight, KeyRound, Warehouse } from "lucide-react";
 import { Link } from "react-router";
 import { img, site } from "../../data/site";
 import { Container } from "../ui/Container";
@@ -75,14 +75,6 @@ export function HomeHero() {
             <a href={site.phoneHref} className="font-semibold text-white tabular-nums underline-offset-4 hover:underline">
               Or call {site.phone}
             </a>
-            <span className="flex items-center gap-1.5">
-              <span className="flex text-teal-400" aria-hidden>
-                {Array.from({ length: 5 }, (_, i) => (
-                  <Star key={i} className="size-4 fill-current" />
-                ))}
-              </span>
-              {site.rating} from {site.reviewCount} reviews
-            </span>
           </div>
         </div>
       </Container>

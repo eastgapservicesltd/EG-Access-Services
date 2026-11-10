@@ -1,6 +1,7 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import { BookingCard } from "../components/sections/BookingCard";
 import { PageHero } from "../components/sections/PageHero";
+import { QuoteForm } from "../components/sections/QuoteForm";
 import { Container } from "../components/ui/Container";
 import { Seo } from "../components/ui/Seo";
 import { formatAddress, site } from "../data/site";
@@ -18,12 +19,12 @@ export default function Contact() {
     <>
       <Seo
         title="Contact & booking"
-        description={`Call or text ${site.phone}, or email ${site.email}, to book locksmith or garage door work.`}
+        description={`Book locksmith or garage door work online, call or text ${site.phone}, or email ${site.email}.`}
         path="/contact"
       />
       <PageHero
         title="Book an appointment"
-        lead="Email, call or text us with a brief description of the problem and your address (street, apt/unit number and city). For lockouts and doors that won't close, calling is fastest."
+        lead="Fill in the form below, or email, call or text us with a brief description of the problem and your address (street, apt/unit number and city). For lockouts and doors that won't close, calling is fastest."
         crumbs={[{ label: "Home", to: "/" }, { label: "Contact" }]}
       />
 
@@ -51,9 +52,25 @@ export default function Contact() {
         </Container>
       </section>
 
-      <section className="py-16 sm:py-20">
-        <Container className="grid gap-8 lg:grid-cols-2">
+      <section id="book" aria-labelledby="book-heading" className="scroll-mt-24 py-16 sm:py-20">
+        <Container className="grid items-start gap-8 lg:grid-cols-[1.4fr_1fr]">
+          <div className="rounded-3xl bg-mist p-2 sm:p-3">
+            <div className="px-4 pt-4 pb-5 sm:px-5">
+              <h2 id="book-heading" className="text-2xl font-bold text-navy-800">
+                Book online
+              </h2>
+              <p className="mt-2 leading-relaxed text-slate">
+                Send us the details and we'll call you back to confirm a time and quote.
+              </p>
+            </div>
+            <QuoteForm />
+          </div>
           <BookingCard />
+        </Container>
+      </section>
+
+      <section aria-label="Map" className="pb-16 sm:pb-20">
+        <Container>
           <iframe
             title="Map showing the EG Access office"
             src={`https://www.google.com/maps?q=${mapQuery}&z=13&output=embed`}

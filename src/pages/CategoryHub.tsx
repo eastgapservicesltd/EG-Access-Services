@@ -7,9 +7,11 @@ import { ServiceTiles } from "../components/sections/ServiceTiles";
 import { Button } from "../components/ui/Button";
 import { Container } from "../components/ui/Container";
 import { SectionHeading } from "../components/ui/SectionHeading";
+import { JsonLd } from "../components/ui/JsonLd";
 import { Seo } from "../components/ui/Seo";
+import { breadcrumbSchema } from "../lib/schema";
 import { byCategory, categories, type Category } from "../data/services";
-import { site } from "../data/site";
+import { img, site } from "../data/site";
 
 const copy: Record<Category, { heading: string; signs: string[]; seo: string }> = {
   locksmith: {
@@ -46,7 +48,8 @@ export default function CategoryHub({ category }: { category: Category }) {
 
   return (
     <>
-      <Seo title={cat.title} description={c.seo} path={cat.path} />
+      <Seo title={`${cat.title} in the GTA`} description={c.seo} path={cat.path} image={img(cat.image, 1200)} />
+      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: cat.title }])} />
       <PageHero
         title={cat.title}
         lead={cat.summary}
